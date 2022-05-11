@@ -1,0 +1,35 @@
+{
+	"config" : 
+	{
+		"last-update" : "2021-10-16",
+		"promo-messages":[
+			{
+				"title":"Bug Fix!! v. 1.1",
+				"description":"There was an issue in some regions where the date was processed incorrectly! Click above for update.",
+				"photo": "promos/promos2.png",
+				"link":"https://drive.google.com/drive/folders/1hYtloEfKI6BZ4GKZ8Z1fEssRU6c9406l?usp=sharing",
+				"isBlocked": ""
+			}
+		],
+		"files" : 
+		[
+			"likewater-pots.json",
+			"likewater-music.json",
+			"likewater-drinks.png",
+			"likewater-flowers.png",
+			"likewater-news.json",
+			"likewater-stream-android.json",
+			"likewater-cards.json",
+			"likewater-clips.json"
+		],
+		"streak-notes" : [
+			{"1":"Leggo, what matters the most is that you're drinking water!"},
+			{"2":"<b>Why Can't You Love Me</b> - Water"},
+			{"3":"Going strong! Keep it up!"},
+			{"4":"On <b>The Road</b> to living a hydrated life."},
+			{"5":"You must really... <b>Like Water</b>"},
+			{"6":"Even <b>When the Rain Stops</b>, you don't stop... drinking water"},
+			{"7":"Water is now officially your <b>Best Friend</b>"}
+		]
+	}
+}

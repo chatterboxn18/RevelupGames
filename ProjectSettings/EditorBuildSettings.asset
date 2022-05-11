@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 0
+    path: Assets/Scenes/LikeWater.unity
+    guid: a43904d5f3480134fb06ac92626ce97c
+  - enabled: 0
+    path: Assets/Scenes/DungeonQuest.unity
+    guid: cbaac7a972b5d6a46b3d9f623d4a1dcc
+  - enabled: 0
+    path: Assets/Scenes/MatchCard.unity
+    guid: 87cb1ef1eb5fb7b48bc29b0a1847e59b
+  - enabled: 0
+    path: Assets/Scenes/SquidBoxes.unity
+    guid: 8b1c9502192b1f04ea5ff3e3bc9a36fb
+  - enabled: 0
+    path: Assets/Scenes/SquidGame.unity
+    guid: c95eed1b2acc6a94ca5fd7c1e48dde68
+  - enabled: 1
+    path: Assets/Scenes/ReVeDle.unity
+    guid: 5023d85f776f0664085f0a40a20216e9
+  m_configObjects: {}

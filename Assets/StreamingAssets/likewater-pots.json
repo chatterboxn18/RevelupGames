@@ -1,0 +1,53 @@
+{
+	"Flowers": [
+		{
+			"Name":"",
+			"Type": "Common",
+			"Index": "0",
+			"Cost": "0",
+			"Earns": "20"
+		},
+		{
+			"Name":"",
+			"Type": "Common",
+			"Index": "1",
+			"Cost": "20",
+			"Earns": "40"
+		},
+		{
+			"Name":"",
+			"Type": "Rare",
+			"Index": "2",
+			"Cost": "50",
+			"Earns": "80"
+		},
+		{
+			"Name":"",
+			"Type": "Common",
+			"Index": "3",
+			"Cost": "20",
+			"Earns": "40"
+		},
+		{
+			"Name":"",
+			"Type": "Common",
+			"Index": "4",
+			"Cost": "20",
+			"Earns": "40"
+		},
+		{
+			"Name":"",
+			"Type": "Common",
+			"Index": "5",
+			"Cost": "20",
+			"Earns": "40"
+		},
+		{
+			"Name":"",
+			"Type": "Common",
+			"Index": "6",
+			"Cost": "20",
+			"Earns": "40"
+		}
+	]
+}

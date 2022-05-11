@@ -1,0 +1,58 @@
+{
+	"Stream": 
+		{
+			"Links": 
+			[
+				{
+					"title" : "Mubeat",
+					"icon" : "",
+					"link" : "https://play.google.com/store/apps/details?id=com.vlending.apps.mubeat"
+				},
+				{
+					"title" : "IDOL\nCHAMP",
+					"icon" : "",
+					"link" : "https://play.google.com/store/apps/details?id=com.nwz.ichampclient"
+				},
+				{
+					"title" : "STAR\nPLAY",
+					"icon" : "",
+					"link" : "https://play.google.com/store/apps/details?id=kr.co.gleammedia.starplay"
+				},
+				{
+					"title" : "Whosfan",
+					"icon" : "",
+					"link" : "https://play.google.com/store/apps/details?id=com.hanteo.whosfan"
+				}
+			],
+			"Videos": 
+			[
+				{
+					"title": "[MV] Like Water",
+					"date": "2021-04-05",
+					"image-url": "https://img.youtube.com/vi/-Ih5UArd4zk/maxresdefault.jpg",
+					"video-url": "https://www.youtube.com/watch?v=-Ih5UArd4zk",
+					"win": ""
+				},
+				{
+					"title": "[MV] Queendom",
+					"date": "2021-08-16",
+					"image-url": "https://img.youtube.com/vi/c9RzZpV460k/maxresdefault.jpg",
+					"video-url": "https://www.youtube.com/watch?v=c9RzZpV460k",
+					"win": ""
+				},
+				{
+					"title": "[MV] Hello",
+					"date": "2021-05-31",
+					"image-url": "https://img.youtube.com/vi/lNvBbh5jDcA/maxresdefault.jpg",
+					"video-url": "https://www.youtube.com/watch?v=lNvBbh5jDcA",
+					"win": ""
+				},
+				{
+					"title": "[MV] Monster",
+					"date": "2020-07-06",
+					"image-url": "https://img.youtube.com/vi/Ujb-gvqsoi0/maxresdefault.jpg",
+					"video-url": "https://www.youtube.com/watch?v=Ujb-gvqsoi0",
+					"win": ""
+				}		
+		}
+}
