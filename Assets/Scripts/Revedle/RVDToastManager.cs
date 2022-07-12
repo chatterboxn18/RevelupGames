@@ -9,7 +9,8 @@ namespace Revedle
 	public enum RVDToast
 	{
 		CopyToClipboard =0,
-		WrongWord = 1
+		WrongWord = 1,
+		ChangeTheme =2
 	}
 	public class RVDToastManager : ToastManager<RVDToast>
 	{

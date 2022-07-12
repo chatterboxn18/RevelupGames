@@ -1,12 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using Revedle;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,7 +18,6 @@ namespace MasterVelvet
 	{
 		[Title("Managers")]
 		[SerializeField] private RVDResourceManager _resourceManager;
-
 		[SerializeField] private RVDAesthetics _aestheticsManager;
 		[SerializeField] private ToastManager<RVDToast> _toastManager;
 		
@@ -34,6 +35,7 @@ namespace MasterVelvet
 		private int _totalWords = 6;
 		private int _wordLength = 5;
 
+		private int _wordIndexInList;
 		private int _currentLetterIndex;
 		private int _currentWordIndex;
 		private int _wordLetterIndex;
@@ -50,6 +52,9 @@ namespace MasterVelvet
 		private const string AESTHETIC_KEY = "revefestivalDay";
 		private int _currentAestheticIndex = 0;
 		[SerializeField] private SimpleButton _statsButton;
+		[SerializeField] private DaySelectItem _dayButton;
+		[SerializeField] private RectTransform _dayButtonParent;
+		private List<DaySelectItem> _dayButtonList = new List<DaySelectItem>();
 
 		[Title("Success Screen")] [SerializeField]
 		private List<TextMeshProUGUI> _successLetters = new List<TextMeshProUGUI>();
@@ -85,6 +90,9 @@ namespace MasterVelvet
 		private const string GUESS_KEY = "guessDistribution";
 		private const string PLAYS_KEY = "gamePlay";
 		private const string GUESSES_KEY = "wordGuesses";
+		
+		//for word selection
+		private const string GUESSED_WORDS_KEY = "wordsGottenCorrect";
 
 		//wordslist
 		private const string WORDS_KEY = "wordsList";
@@ -106,7 +114,7 @@ namespace MasterVelvet
 			PrepareAesthetics(PlayerPrefs.GetInt(AESTHETIC_KEY));
 		}
 
-		private void PrepareAesthetics(int index)
+		private void PrepareAesthetics(int index, bool isOverride = false)
 		{
 			var day = _aestheticsManager.DayAsthetics[index];
 			_backgroundImage.color = day.Background;
@@ -126,8 +134,47 @@ namespace MasterVelvet
 
 			foreach (var value in _keyboardDict.Values)
 			{
-				if (!_colors.Contains(value.color))
+				if (isOverride)
 					value.color = day.KeyColor;
+				else if (!_colors.Contains(value.color))
+					value.color = day.KeyColor;
+
+			}
+		}
+
+		private void PrepareWord(RVDResourceManager.WordEntry entry)
+		{
+			if (_isOver)
+			{
+				_isOver = false;
+			}
+			
+			// should always reset if selected
+			ResetWord();
+			PrepareAesthetics(PlayerPrefs.GetInt(AESTHETIC_KEY), true);
+			
+			_wordToGuess = entry.Word;
+			_wordLength = _wordToGuess.Length;
+			_dykDescription.text = entry.Description + "\nClick here to see more.";
+			_dykLink = entry.Link;
+			_dykCover.sprite = _resourceManager.AlbumCovers[entry.SpriteIndex];
+		}
+
+		private void PrepareWordList()
+		{
+			var counter = 0;
+			var list = "";
+			if (PlayerPrefs.HasKey(GUESSED_WORDS_KEY))
+			{
+				list = PlayerPrefs.GetString(GUESSED_WORDS_KEY);
+			}
+			foreach (var item in _resourceManager.WordEntryController.JsonContent.List)
+			{
+				var day = Instantiate(_dayButton, _dayButtonParent);
+				day.SetDay("Day " + (counter +1), list.Contains(item.Word), counter);
+				day.Evt_SelectWord += ButtonEvt_SetWord;
+				_dayButtonList.Add(day);
+				counter++;
 			}
 		}
 
@@ -137,35 +184,39 @@ namespace MasterVelvet
 			{
 				yield return null;
 			}
-			
 			//Getting today's word by subtracting today with the first day
-			var index = DateTime.Today.Date - new DateTime(2022, 3, 1);
+			/*var index = DateTime.Today.Date - new DateTime(2022, 3, 1);
 			
-			var item = _resourceManager.WordEntryController.JsonContent.List[index.Days];
-			_wordToGuess = item.Word;
-			_wordLength = _wordToGuess.Length;
-			_todayIndex = index.Days;
-			_dykDescription.text = item.Description + "\nClick here to see more.";
-			_dykLink = item.Link;
-			_dykCover.sprite = _resourceManager.AlbumCovers[item.SpriteIndex];
+			var item = [index.Days];
 			
+			_todayIndex = entry.Days;
+			
+			// set up all the words in menu
+			{
+				
+			}*/
+
+			PrepareWordList();
+			
+			// Creates all the letters for the first time
 			for (var i = 0; i < _totalLetters; i++)
 			{
 				var letter = Instantiate(_letterBoxPrefab, _lettersParent);
 				_letterBoxes.Add(letter);
 			}
 
-			if (PlayerPrefs.HasKey(DATE_KEY))
+			// REMOVED SO IT'S NOT DATE DEPENDENT
+			/*if (PlayerPrefs.HasKey(DATE_KEY))
 			{
 				var date = DateTime.Parse(PlayerPrefs.GetString(DATE_KEY));
 				if (date.Date == DateTime.Today.Date)
 				{
 					_isOver = true;
-					/*if (PlayerPrefs.HasKey(PLAYS_KEY))
-					{
-						Debug.Log(PlayerPrefs.GetString(PLAYS_KEY));
-						WriteShareString(PlayerPrefs.GetString(PLAYS_KEY));
-					}*/
+					//if (PlayerPrefs.HasKey(PLAYS_KEY))
+					//{
+					//	Debug.Log(PlayerPrefs.GetString(PLAYS_KEY));
+					//	WriteShareString(PlayerPrefs.GetString(PLAYS_KEY));
+					//}
 					ParseGuessString();
 					DisplayPlayerStats();
 					Evt_OnSuccess();
@@ -178,7 +229,7 @@ namespace MasterVelvet
 			else
 			{
 				_statsButton.SetVisibility(false);
-			}
+			}*/
 		}
 
 		private void ParseGuessString()
@@ -214,7 +265,7 @@ namespace MasterVelvet
 				_shareAnswerString+= "\n";
 			}
 		}
-
+		
 		private void UpdatePlayerStats(bool isWin)
 		{
 			//also keep a copy of gameplay
@@ -310,31 +361,7 @@ namespace MasterVelvet
 			}
 			return returnString;
 		}
-		
-		public void ButtonEvt_OpenDYKLink()
-		{
-			#if UNITY_EDITOR
-			Application.OpenURL(_dykLink);
-			#elif UNITY_WEBGL
-			OpenLink(_dykLink);
-			#endif
-		}
 
-		public void ButtonEvt_OpenShareLink()
-		{
-			var index = ((_currentWordIndex + 1) > 6) ? "X" : (_currentWordIndex + 1).ToString();
-			#if UNITY_EDITOR
-			GUIUtility.systemCopyBuffer = DateTime.Now.Month + "/" + DateTime.Now.Day + " Revedle " + index + "/6\n" + _shareAnswerString + "https://thelamgoesmoo.github.io/revedle #RedVelvet #revedle";
-			#else
-			Debug.Log(_shareAnswerString);
-			var date = DateTime.Today.Date;
-			CopyToClipboard(date.Month, date.Day, _shareAnswerString, index);
-			//_shareString += DateTime.Now.Month + "/" + DateTime.Now.Day + " Revedle " + (_currentWordIndex +1) + "/6. Play at https://thelamgoesmoo.github.io/revedle #RedVelvet #revedle";
-			//Application.OpenURL(_shareString);
-			#endif
-			_toastManager.ShowToast(RVDToast.CopyToClipboard);
-		}
-		
 		private void Evt_OnSuccess()
 		{
 			_isOver = true;
@@ -345,7 +372,9 @@ namespace MasterVelvet
 				if (string.IsNullOrEmpty(character)) break;
 				word += character;
 			}
-			PlayerPrefs.SetString(GUESSES_KEY, word);
+			
+			// stats 
+			//PlayerPrefs.SetString(GUESSES_KEY, word);
 			for (var i = 0; i < _wordLength; i++)
 			{
 				_successLetters[i].text = _wordToGuess[i].ToString();
@@ -360,14 +389,6 @@ namespace MasterVelvet
 			_successScreen.TransitionOn();
 		}
 		
-		public void ButtonEvt_EnterKey(string letter)
-		{
-			if (_isOver) return;
-			if (_wordLetterIndex == _wordLength)
-				return;
-			Evt_UpdateKey(letter);
-		}
-
 		private void Evt_UpdateKey(string letter)
 		{
 			_letterBoxes[_currentLetterIndex].SetLetter(letter);
@@ -375,30 +396,20 @@ namespace MasterVelvet
 			_currentLetterIndex++;
 			_currentWord += letter;
 		}
-		
-		public void ButtonEvt_Delete()
+
+		private void ResetWord()
 		{
-			if (_isOver) return;
-			if (_wordLetterIndex == 0)
-				return;
-			_currentLetterIndex--;
-			_wordLetterIndex--;
-			_currentWord = _currentWord.Substring(0, _currentWord.Length - 1);
-			_letterBoxes[_currentLetterIndex].SetLetter("");
+			_currentWord = "";
+			_currentLetterIndex = 0;
+			_currentWordIndex = 0;
+			_wordLetterIndex = 0;
+			foreach (var letter in _letterBoxes)
+			{
+				letter.UpdateBox(MRVEnum.LetterState.None);
+				letter.SetLetter(String.Empty);
+			}
 		}
 
-		public void ButtonEvt_Menu()
-		{
-			_menuController.TransitionOn();
-		}
-		
-		public void ButtonEvt_SelectAesthetics(int index)
-		{
-			PlayerPrefs.SetInt(AESTHETIC_KEY, index);
-			PrepareAesthetics(index);
-			_menuController.TransitionOff();
-		}
-		
 		private bool CheckAnswer()
 		{
 			var checkIndex = _currentWordIndex * _wordLength;
@@ -477,6 +488,49 @@ namespace MasterVelvet
 			return correctIndexs.Count == _wordLength;
 		}
 		
+		private void AddWordToCorrectWordList()
+		{
+			if (!PlayerPrefs.HasKey(GUESSED_WORDS_KEY))
+			{
+				PlayerPrefs.SetString(GUESSED_WORDS_KEY, _currentWord);
+			}
+			else
+			{
+				var list = PlayerPrefs.GetString(GUESSED_WORDS_KEY);
+				if (!list.Contains(_currentWord))
+				{
+					list += "," + _currentWord;
+					PlayerPrefs.SetString(GUESSED_WORDS_KEY, list);
+				}
+			}
+			
+			_dayButtonList[_wordIndexInList].UpdateDay(true);
+		}
+		
+		private void AddWordKey()
+		{
+			if (!PlayerPrefs.HasKey(WORDS_KEY))
+			{
+				PlayerPrefs.SetString(WORDS_KEY, _todayIndex.ToString());
+			}
+			else
+			{
+				var list = PlayerPrefs.GetString(WORDS_KEY);
+				list += "," + _todayIndex;
+				PlayerPrefs.SetString(WORDS_KEY, list);
+			}
+		}
+		
+		private void UpdateSuccessText(bool isWin)
+		{
+			_successTitle.text = isWin ? _winTitle :_loseTitle;
+			_successDescription.text = isWin ?  _winDescription:_loseDescription;
+		}
+		
+		/////////////////////
+		/// Button Events ///
+		/////////////////////
+		
 		public void ButtonEvt_Enter()
 		{
 			if (_isOver) return;
@@ -531,8 +585,9 @@ namespace MasterVelvet
 			
 			if (isComplete)
 			{
-				AddWordKey();
-				UpdatePlayerStats(true);
+				AddWordToCorrectWordList();
+				//AddWordKey();
+				//UpdatePlayerStats(true);
 				UpdateSuccessText(true);
 				Evt_OnSuccess();
 				return;
@@ -543,7 +598,7 @@ namespace MasterVelvet
 
 			if (_currentLetterIndex == _totalLetters)
 			{
-				UpdatePlayerStats(false);
+				//UpdatePlayerStats(false);
 				UpdateSuccessText(false);
 				Evt_OnSuccess();
 				Debug.Log("The game is lost");
@@ -553,25 +608,78 @@ namespace MasterVelvet
 			_wordLetterIndex = 0;
 			_currentWord = "";
 		}
-
-		private void AddWordKey()
+		
+		public void ButtonEvt_Delete()
 		{
-			if (!PlayerPrefs.HasKey(WORDS_KEY))
-			{
-				PlayerPrefs.SetString(WORDS_KEY, _todayIndex.ToString());
-			}
-			else
-			{
-				var list = PlayerPrefs.GetString(WORDS_KEY);
-				list += "," + _todayIndex;
-				PlayerPrefs.SetString(WORDS_KEY, list);
-			}
+			if (_isOver) return;
+			if (_wordLetterIndex == 0)
+				return;
+			_currentLetterIndex--;
+			_wordLetterIndex--;
+			_currentWord = _currentWord.Substring(0, _currentWord.Length - 1);
+			_letterBoxes[_currentLetterIndex].SetLetter("");
+		}
+
+		public void ButtonEvt_Menu()
+		{
+			_menuController.TransitionOn();
 		}
 		
-		private void UpdateSuccessText(bool isWin)
+		public void ButtonEvt_SelectAesthetics(int index)
 		{
-			_successTitle.text = isWin ? _winTitle :_loseTitle;
-			_successDescription.text = isWin ?  _winDescription:_loseDescription;
+			PlayerPrefs.SetInt(AESTHETIC_KEY, index);
+			PrepareAesthetics(index);
+			if (!string.IsNullOrEmpty(_wordToGuess))
+				_menuController.TransitionOff();
+			else
+				_toastManager.ShowToast(RVDToast.ChangeTheme);
 		}
+		
+		public void ButtonEvt_EnterKey(string letter)
+		{
+			if (_isOver) return;
+			if (_wordLetterIndex == _wordLength)
+				return;
+			Evt_UpdateKey(letter);
+		}
+		
+				
+		public void ButtonEvt_OpenDYKLink()
+		{
+#if UNITY_EDITOR
+			Application.OpenURL(_dykLink);
+#elif UNITY_WEBGL
+			OpenLink(_dykLink);
+#endif
+		}
+
+		public void ButtonEvt_OpenShareLink()
+		{
+			var index = ((_currentWordIndex + 1) > 6) ? "X" : (_currentWordIndex + 1).ToString();
+#if UNITY_EDITOR
+			GUIUtility.systemCopyBuffer = DateTime.Now.Month + "/" + DateTime.Now.Day + " Revedle " + index + "/6\n" + _shareAnswerString + "https://thelamgoesmoo.github.io/revedle #RedVelvet #revedle";
+#else
+			Debug.Log(_shareAnswerString);
+			var date = DateTime.Today.Date;
+			CopyToClipboard(date.Month, date.Day, _shareAnswerString, index);
+			//_shareString += DateTime.Now.Month + "/" + DateTime.Now.Day + " Revedle " + (_currentWordIndex +1) + "/6. Play at https://thelamgoesmoo.github.io/revedle #RedVelvet #revedle";
+			//Application.OpenURL(_shareString);
+#endif
+			_toastManager.ShowToast(RVDToast.CopyToClipboard);
+		}
+		
+		public void ButtonEvt_ReturnToMenu()
+		{
+			_successScreen.TransitionOff();
+			_menuController.TransitionOn();
+		}
+
+		public void ButtonEvt_SetWord(int index)
+		{
+			_wordIndexInList = index;
+			PrepareWord(_resourceManager.WordEntryController.JsonContent.List[index]);
+			_menuController.TransitionOff();
+		}
+
 	}
 }

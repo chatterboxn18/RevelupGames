@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BaseController : MonoBehaviour
@@ -39,6 +37,7 @@ public class BaseController : MonoBehaviour
 			});
 			return;
 		}
+
 		Transition(true);
 		//LeanTween.alphaCanvas(canvasGroup, to, LWConfig.FadeTime).setOnComplete(() => { gameObject.SetActive(on);});
 	}
@@ -63,6 +62,7 @@ public class BaseController : MonoBehaviour
 			});
 			return;
 		}
+
 		Transition(false);
 	}
 

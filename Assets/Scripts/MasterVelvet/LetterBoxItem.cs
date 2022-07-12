@@ -31,9 +31,15 @@ namespace MasterVelvet
 					LeanTween.value(_imageFill.gameObject, setColorCallback, Color.white,  _colors[2], time);
 					//_imageFill.color = _colors[2];
 					break;
+				default:
+					_imageFill.color = Color.white;
+					break;
 			}
 
-			_letterText.color = Color.white;
+			if (state == MRVEnum.LetterState.None)
+				_letterText.color = Color.black;
+			else
+				_letterText.color = Color.white;
 		}
 
 		private void setColorCallback( Color c )
