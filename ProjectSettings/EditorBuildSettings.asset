@@ -8,7 +8,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/LikeWater.unity
     guid: a43904d5f3480134fb06ac92626ce97c
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/DungeonQuest.unity
     guid: cbaac7a972b5d6a46b3d9f623d4a1dcc
   - enabled: 0
@@ -20,7 +20,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SquidGame.unity
     guid: c95eed1b2acc6a94ca5fd7c1e48dde68
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ReVeDle.unity
     guid: 5023d85f776f0664085f0a40a20216e9
   m_configObjects: {}

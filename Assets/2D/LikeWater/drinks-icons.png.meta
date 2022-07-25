@@ -36,7 +36,7 @@ TextureImporter:
       213: -2827866857056660884
     second: drinks-icons_6
   externalObjects: {}
-  serializedVersion: 10
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -56,6 +56,8 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -64,9 +66,9 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
-    aniso: -1
-    mipBias: -100
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -87,9 +89,13 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -170,7 +176,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: b3b860cab834d8cc0800000000000000
-      internalID: -3707232651090425029
+      internalID: -609319629464824433
       vertices: []
       indices: 
       edges: []
@@ -191,7 +197,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 7973e05d47a650e10800000000000000
-      internalID: 2163252246044620695
+      internalID: -4314060501150275994
       vertices: []
       indices: 
       edges: []
@@ -212,7 +218,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 30261389d7e9ab980800000000000000
-      internalID: -8522325082583768573
+      internalID: 4685139340818262096
       vertices: []
       indices: 
       edges: []
@@ -233,7 +239,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: d078c6c1cd7941c60800000000000000
-      internalID: 7788016627255904013
+      internalID: 931629280875173093
       vertices: []
       indices: 
       edges: []
@@ -311,6 +317,14 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      drinks-icons_1: -4314060501150275994
+      drinks-icons_3: 931629280875173093
+      drinks-icons_4: -6129514583727945878
+      drinks-icons_2: 4685139340818262096
+      drinks-icons_5: -8860742016329289265
+      drinks-icons_0: -609319629464824433
+      drinks-icons_6: -2827866857056660884
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

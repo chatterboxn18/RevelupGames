@@ -75,7 +75,7 @@ TextureImporter:
       213: -7166251554048015215
     second: pot-sprite-sheet_12
   externalObjects: {}
-  serializedVersion: 10
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -95,6 +95,8 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -103,9 +105,9 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
-    aniso: -1
-    mipBias: -100
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -126,9 +128,13 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -335,7 +341,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 4084e5a079b994e70800000000000000
-      internalID: 9099975595095115780
+      internalID: -6949292119793330448
       vertices: []
       indices: 
       edges: []
@@ -356,7 +362,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: ad846082fd6faae00800000000000000
-      internalID: 1056928500881443034
+      internalID: -4587562058944245784
       vertices: []
       indices: 
       edges: []
@@ -377,7 +383,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: ebd1eac8d794d7870800000000000000
-      internalID: 8682176460220145086
+      internalID: -2651320328061117129
       vertices: []
       indices: 
       edges: []
@@ -398,7 +404,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: e8cc714894f4bd9d0800000000000000
-      internalID: -2748515970412196722
+      internalID: -3923807017554292832
       vertices: []
       indices: 
       edges: []
@@ -419,7 +425,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 97c06204e51d52210800000000000000
-      internalID: 1307681469554363513
+      internalID: 9105450072539949044
       vertices: []
       indices: 
       edges: []
@@ -440,7 +446,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 88bc44fe8ad469ea0800000000000000
-      internalID: -5866416076639384696
+      internalID: 5517137743648409597
       vertices: []
       indices: 
       edges: []
@@ -461,7 +467,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 4413485e792178030800000000000000
-      internalID: 3496784079276486980
+      internalID: 5699725825759225967
       vertices: []
       indices: 
       edges: []
@@ -482,7 +488,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 4cf66d3b7aef0d040800000000000000
-      internalID: 4670512809813372868
+      internalID: -2078614683281239171
       vertices: []
       indices: 
       edges: []
@@ -503,7 +509,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 19480e51e2c5c8c90800000000000000
-      internalID: -7166251554048015215
+      internalID: 3350250200567672935
       vertices: []
       indices: 
       edges: []
@@ -518,6 +524,22 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      pot-sprite-sheet_3: 5008965873151922662
+      pot-sprite-sheet_6: 9105450072539949044
+      pot-sprite-sheet_14: 4722877113316582684
+      pot-sprite-sheet_1: -4587562058944245784
+      pot-sprite-sheet_4: -5372182022014425961
+      pot-sprite-sheet_2: -2651320328061117129
+      pot-sprite-sheet_9: 2788658938299378864
+      pot-sprite-sheet_5: -3923807017554292832
+      pot-sprite-sheet_8: -6226976858346626159
+      pot-sprite-sheet_7: 5517137743648409597
+      pot-sprite-sheet_0: -6949292119793330448
+      pot-sprite-sheet_10: 5699725825759225967
+      pot-sprite-sheet_12: 3350250200567672935
+      pot-sprite-sheet_13: -6356270503020437096
+      pot-sprite-sheet_11: -2078614683281239171
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -78,7 +78,7 @@ TextureImporter:
       213: -4389761978099310030
     second: redvelvet-cardsheet 1_24
   externalObjects: {}
-  serializedVersion: 10
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -98,6 +98,8 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -106,12 +108,12 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
-    aniso: -1
-    mipBias: -100
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
-    wrapW: -1
+    wrapW: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -129,9 +131,13 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -731,6 +737,32 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      redvelvet-cardsheet 1_6: -7583561354758240953
+      redvelvet-cardsheet 1_18: 3095837830715105854
+      redvelvet-cardsheet 1_22: 7218712891345418415
+      redvelvet-cardsheet 1_8: 4530831768296071613
+      redvelvet-cardsheet 1_14: -7764225814243451459
+      redvelvet-cardsheet 1_12: -7179567823197108911
+      redvelvet-cardsheet 1_2: 4570897990418290669
+      redvelvet-cardsheet 1_16: 1480243904152629933
+      redvelvet-cardsheet 1_19: 7888807715606372119
+      redvelvet-cardsheet 1_0: 535770933700357630
+      redvelvet-cardsheet 1_10: 6076814262393383497
+      redvelvet-cardsheet 1_21: -5762935511057949591
+      redvelvet-cardsheet 1_7: -8084818474545033790
+      redvelvet-cardsheet 1_9: -9081500451015502908
+      redvelvet-cardsheet 1_15: -7063433287212247553
+      redvelvet-cardsheet 1_3: -2199838610369081761
+      redvelvet-cardsheet 1_11: -5151956310695197908
+      redvelvet-cardsheet 1_24: -4389761978099310030
+      redvelvet-cardsheet 1_1: -1583904642641841756
+      redvelvet-cardsheet 1_4: -6000326748479438669
+      redvelvet-cardsheet 1_20: -5821629611245010497
+      redvelvet-cardsheet 1_17: -3608618320752642514
+      redvelvet-cardsheet 1_13: -2605242469354318524
+      redvelvet-cardsheet 1_23: 4303139826389027124
+      redvelvet-cardsheet 1_5: 2146917056834159010
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

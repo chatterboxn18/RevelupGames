@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -54,7 +55,6 @@ namespace DungeonQuest
 
 		// Data
 		private DQCharacterData _data;
-
 		
 		// Other
 		private float _actionTimer;
@@ -80,7 +80,24 @@ namespace DungeonQuest
 				index++;
 			}
 			_actionQueue.Init(0.1f);
+			
+			//populates the bottom tray with irene's first
 			ButtonEvt_SelectCharacter("Irene");
+			
+			/*using (UnityWebRequest uwr = UnityWebRequestTexture.GetTexture(link))
+			{
+				yield return uwr.SendWebRequest();
+				if (uwr.result == UnityWebRequest.Result.Success)
+				{
+					var texture = DownloadHandlerTexture.GetContent(uwr);
+					
+				}
+				else
+				{
+					Debug.LogError(uwr.error);
+				}
+			}*/
+
 		}
 
 		private void Update()
