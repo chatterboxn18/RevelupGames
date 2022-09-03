@@ -23,7 +23,9 @@ namespace DungeonQuest
 		private float _monsterToCoinRatio = 0.1f;
 
 		private int _playerLevel = 1;
-		
+
+		private string _letters = "abcdefghijklmnopqrstuvwxyz";
+
 		// Audio 
 		[SerializeField] private AudioController _audioController;
 		
@@ -126,7 +128,7 @@ namespace DungeonQuest
 		{
 			_currentDamage += damage;
 			_audioController.CreateAudio(AudioController.ClipName.Magic);
-			ShowDamage(index, damage);
+			ShowDamage(index, damage.ToString());
 			CheckDamage();
 		}
 
@@ -140,9 +142,9 @@ namespace DungeonQuest
 		{
 			var character = _characters[characterIndex];
 			
-			var damage = CalculateDamage(character.Level, character.AttackDamage, character.CritChance, true);
+			var damage = CalculateCharacterDamage(character.Level, character.AttackDamage, character.CritChance, true);
 			_currentDamage += damage;
-			ShowDamage(characterIndex, damage);
+			ShowDamage(characterIndex, damage.ToString());
 			
 			character.Evt_OnAttackUp();
 			
@@ -151,18 +153,18 @@ namespace DungeonQuest
 			CheckDamage();
 		}
 
-		private void ShowDamage(int index, int damage)
+		private void ShowDamage(int index, string damage)
 		{
 			var colors = DQResourceManager.Colors;
 			_actionQueue.AddToQueue(() =>
 			{
 				var damageItem = Instantiate(_damagePrefab, _damageContainer);
-				damageItem.Init(damage.ToString(CultureInfo.InvariantCulture), 0.2f, colors[(DQCharacterData.RedVelvet) index]);
+				damageItem.Init(damage, 0.2f, colors[(DQCharacterData.RedVelvet) index]);
 			});
 			
 		}
 		
-		private int CalculateDamage(int level, float attack, float crit, bool isPierce)
+		private int CalculateCharacterDamage(int level, float attack, float crit, bool isPierce)
 		{
 			return Mathf.RoundToInt(level * attack / 1f);
 		}
@@ -201,7 +203,6 @@ namespace DungeonQuest
 	
 		private void Evt_AddDamage(int index, DQResourceManager.UpgradeCard card)
 		{
-			
 			_characters[index].AddDamage(card);
 		}
 

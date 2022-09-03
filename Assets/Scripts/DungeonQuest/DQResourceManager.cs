@@ -2,8 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.TextCore;
 using Application = UnityEngine.Application;
 
 namespace DungeonQuest
@@ -87,8 +89,9 @@ namespace DungeonQuest
 				(DQCharacterData) SerializationManager.Load(Application.persistentDataPath + "/saves/" + DQConfig.SaveName + ".rv"));
 
 			yield return DownloadJsonFiles();
-			yield return GetUpgrades();
+			yield return GetUpgrades("redvelvet-upgrades.png");
 			yield return GetSkins();
+			new FaceInfo_Legacy();
 			
 			_isReady = true;
 		}
@@ -152,17 +155,18 @@ namespace DungeonQuest
 			}
 		}
 		
-		private IEnumerator GetUpgrades()
+		private IEnumerator GetUpgrades(string fileName)
 		{
-			var relativePath = Path.Combine(DQConfig.FolderName, "redvelvet-upgrades.png");
+			var relativePath = Path.Combine(DQConfig.FolderName, fileName);
+			//todo: change this to check if server is updated before looking at persistent Data 
 			if (!File.Exists(Path.Combine(Application.persistentDataPath, relativePath)))
 			{
 				var succeeded = false;
-				yield return DownloadFile("DungeonQuest/redvelvet-upgrades.png", (success, path) =>
+				yield return DownloadFile("DungeonQuest/" + fileName, (success, path) =>
 				{
 					succeeded = success;
 				});
-				if (!succeeded) Debug.LogError("Download of " + "redvelvet-upgrades.png" + " failed.");
+				if (!succeeded) Debug.LogError("Download of " + fileName + " failed.");
 			}
 			
 			
