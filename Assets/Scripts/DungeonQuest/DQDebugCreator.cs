@@ -10,7 +10,6 @@ namespace DungeonQuest
         [SerializeField] private RectTransform _cardPhotoSize;
         [SerializeField] private NativeGalleryController _nativeGallery;
 
-        //private JSONDataController<>
         private IEnumerator Start()
         {
             yield return null;
