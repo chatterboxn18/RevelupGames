@@ -65,7 +65,7 @@ namespace DungeonQuest
 		}
 
 		// This call has a null check so it could be expensive without a reference 
-		public Dictionary<RedVelvet, Character> Characters => _characters;
+		public static Dictionary<RedVelvet, Character> Characters => _characters;
 		
 		private static Dictionary<RedVelvet, Character> _characters = new Dictionary<RedVelvet, Character>()
 		{
@@ -93,18 +93,18 @@ namespace DungeonQuest
 		/// can have an effect -> takes parameter Card and Character
 		/// rarity effects -> takes parameter Card -> can effect base stats or price inflation or action growth
 		/// </summary>
-		public class Card
+		public class Card : ScriptableObject
 		{
 			public Character Character;
-			public Sprite[] Sprites;
+			public List<Sprite> Sprites = new List<Sprite>();
 			public Element Element;
 			public int CardNumber;
-			public float Action;
-			public float ActionGrowth;
-			public ActionGrowthType Type;
-			public int Rarity;
-			public int StartPrice;
-			public float PriceInflation;
+			public float Action = 5f;
+			public float ActionGrowth = 1.1f;
+			public ActionGrowthType Type = ActionGrowthType.Flat;
+			public int Rarity = 1;
+			public int StartPrice = 1;
+			public float PriceInflation = 1.1f;
 			public Action<Character, Card> Effect;
 			public Action<Card> RarityEffect;
 		}
