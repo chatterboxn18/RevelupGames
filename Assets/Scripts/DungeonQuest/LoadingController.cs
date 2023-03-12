@@ -4,13 +4,16 @@ using DungeonQuest;
 using UnityEngine;
 using UnityEngine.Android;
 
-namespace LikeWater
+namespace RevelupGames
 {
-	public class DQLoadingController : MonoBehaviour
+	public class LoadingController : MonoBehaviour
 	{
 		private Animator _animator;
 		private bool _isLoaded;
 
+		[SerializeField]
+		private bool _forceLoad;
+		
 		private void Awake()
 		{
 			_animator = GetComponent<Animator>();
@@ -24,7 +27,7 @@ namespace LikeWater
 		{
 			if (_isLoaded)
 				return;
-			if (DQResourceManager.IsReady)
+			if (_forceLoad || DQResourceManager.IsReady)
 			{
 				_animator.SetTrigger("DoFinish");
 				_isLoaded = true;
