@@ -31,6 +31,8 @@ public class SimpleButton : Selectable, IPointerClickHandler
 	public Action Evt_BasicEvent_Click = delegate {  };
 	public Action Evt_BasicEvent_Down = delegate {  };
 
+	public Action<PointerEventData> Evt_PointerDownEvent = data => { };
+
 	public void SetFadeTime(float time)
 	{
 		_fadeTime = time;
@@ -103,6 +105,7 @@ public class SimpleButton : Selectable, IPointerClickHandler
 		if (!_isVisible || _isDisabled) return;
 		EvtPointerDown.Invoke(arg0: eventData);
 		Evt_BasicEvent_Down();
+		Evt_PointerDownEvent(eventData);
 	}
 
 	public void OnPointerClick(PointerEventData eventData)
